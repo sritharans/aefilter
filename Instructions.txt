@@ -1,0 +1,24 @@
+This milestone was accomplished using a multimodel NoSQL database from Arango.
+It is similar in vein as Hive but offers more DB models than Hive does.
+Information on Arango and comparisons are available here:
+https://www.arangodb.com/why-arangodb/
+
+1. Download and install ArangoDB from here:
+https://www.arangodb.com/download-major/
+
+2. Create a database and user in Arango Shell:
+arangosh> db._createDatabase("ae_product");
+arangosh> var users = require("@arangodb/users");
+arangosh> users.save("admin@ae_product", "password");
+arangosh> users.grantDatabase("admin@ae_product", "ae_product");
+
+3. Import the sample CSV into an Arango document collection:
+arangoimport --file "output.csv" --type csv --collection "item_list" --server.database "ae_product" --server.username "admin@ae_product"
+
+4. Then install the following Arango client library for Python:
+pip install python-arango
+
+5. Finally run the items_list filter script in the "pyaefilt" folder, like this:
+aefilter.py 169
+
+6. It will query and retrieve the sample items based on the input price and its metadata.
